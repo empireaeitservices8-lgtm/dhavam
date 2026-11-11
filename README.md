@@ -37,3 +37,4 @@ npm run dev
 ```
 
 Frontend runs on `http://localhost:3000` and Backend runs on `http://localhost:5000`.
+
