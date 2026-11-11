@@ -1,40 +1,75 @@
-# dhavam
+# Dhavam Spices
 
-Dhavam Spices - E-Commerce Platform with Admin Panel
+An all-in-one full-stack e-commerce web platform for Dhavam Spices, built with **Next.js 15 (App Router)**, **Tailwind CSS**, and **AWS TiDB Cloud** (MySQL-compatible serverless database).
 
-## Project Structure
-- `dhavam/dhavam-backend`: Express.js backend API with MySQL/TiDB Cloud integration.
-- `dhavam/dhavam-spices`: Next.js 15 frontend application with Tailwind CSS and responsive design.
+---
+
+## Architecture: Unified Single-Project
+
+Both the frontend storefront, admin portal, and backend API routes are unified into a single project.
+- **Frontend & Admin Portal:** Next.js pages with SSR/SSG and Partial Prerendering.
+- **Backend APIs:** Next.js App Router API Handlers (`app/api/...`) connecting securely via SSL to AWS TiDB Cloud.
+- **No separate Express backend server is required.**
+
+---
 
 ## Features
-- **Customer Storefront:**
-  - Product browsing by category (Whole Spices, Ground Spices, Combo Packs).
-  - Multiple size variants and pricing per product.
-  - Cart, Checkout, Order tracking, and Profile management.
-- **Admin Panel:**
-  - Secure Admin authentication (Username or Email + Strong password).
-  - Add new products with image upload, categories, and size/price variants.
-  - Edit existing products and images.
-  - Delete products with live database sync.
-  - Manage customer orders and update delivery status.
 
-## Getting Started
+### Customer Storefront
+- Browse spices by category (Whole Spices, Spice Powders, Combo Packs).
+- Dynamic pack sizes and live pricing calculations.
+- Shopping cart, checkout (COD & Online options), and order tracking.
+- User registration and login with JWT authentication.
+- User profile management.
 
-### 1. Backend Setup
-```bash
-cd dhavam/dhavam-backend
-npm install
-# configure .env with DATABASE_URL, PORT=5000, JWT_SECRET
-node index.js
-```
+### Admin Portal (`/admin`)
+- Secure admin login with strong password enforcement.
+- Manage products:
+  - Add new spices with image upload, pack sizes, and pricing.
+  - Edit existing spices and update images.
+  - Delete spices with instant database synchronization.
+- Manage customer orders and update shipping/delivery statuses.
+- View customer list and registered accounts.
 
-### 2. Frontend Setup
-```bash
-cd dhavam/dhavam-spices
-npm install
-# configure .env.local with NEXT_PUBLIC_API_URL=http://localhost:5000
-npm run dev
-```
+---
 
-Frontend runs on `http://localhost:3000` and Backend runs on `http://localhost:5000`.
+## Admin Credentials
 
+- **URL:** `/login` (redirects directly to `/admin`)
+- **Username:** `admin` *(or Email: `dhavamspices@gmail.com`)*
+- **Password:** `Admin@Dhavam2026`
+
+---
+
+## Local Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Configure environment variables in `.env.local`:
+   ```env
+   DATABASE_URL="mysql://3jWo1Qc52mbYVmw.root:jhI9Rm1CzmmplOdW@gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/dhavam_spices?sslaccept=strict"
+   JWT_SECRET="supersecretkey1234"
+   ```
+
+3. Start development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Deploy to Vercel (1-Click)
+
+Because this repository is a unified single project:
+1. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+2. Select this GitHub repository (`dhavam`).
+3. Vercel will automatically detect **Next.js** at the root.
+4. Add the following **Environment Variables**:
+   - `DATABASE_URL` = `mysql://3jWo1Qc52mbYVmw.root:jhI9Rm1CzmmplOdW@gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/dhavam_spices?sslaccept=strict`
+   - `JWT_SECRET` = `supersecretkey1234`
+5. Click **Deploy**!
+   Your site (Frontend + Backend APIs + Admin Panel) will be live in ~1 minute.
